@@ -7,6 +7,17 @@ The point of this project is to show basic cybersecurity concepts like:
 - Password hashing
 - File permission misconfiguration scanning
 
+## Installation
+
+1. Make sure Python 3.10 or newer is installed.
+2. Clone the repository:
+
+   git clone https://github.com/YOUR_USERNAME/securityThingy2000.git
+
+3. Navigate into the project directory:
+
+   cd securityThingy2000
+
 ## How to Run
 
 1. Open a terminal in the project directory.
@@ -28,7 +39,7 @@ The point of this project is to show basic cybersecurity concepts like:
 
 ## WARNING
 
-This tool was developed for educational purposes to demonstrate basic ethical hacking and security analysis techniques. It does not exploit vulnerabilities, and shouldn't be used for real-life purposes.
+This tool was developed for educational purposes to demonstrate basic ethical hacking and security analysis techniques. It does not exploit vulnerabilities, and shouldn't be used for real-life purposes. It does not protect against advanced attacks such as phishing, keylogging, or social engineering. The file permission scanner only checks for world-writable permissions and does not detect all possible misconfigurations.
 
 ## Ethical Considerations
 
