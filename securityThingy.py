@@ -2,7 +2,7 @@ import os
 import stat
 import hashlib
 
-userInput = input("Enter a password: ")
+password = input("Enter a password: ")
 
 special_chars = "!@#$%^&*()-_=+[]{};:'\",.<>/?\\|`~"
 
@@ -14,15 +14,15 @@ short = False
 index = 0
 score = 0
 
-if len(userInput) < 8:
+if len(password) < 8:
     short = True
-for char in userInput:
+for char in password:
     if char in special_chars:
         spec = True
     if not char.isupper():
         noUpper = True
     if index > 0:
-        if userInput[index] == userInput[index-1]:
+        if password[index] == password[index-1]:
             repeatChar = True
     index += 1
 
@@ -52,7 +52,7 @@ match score:
     case 4:
         print("Your password is vey weak.\n")
 
-hashed_password = hashlib.sha256(userInput.encode()).hexdigest()
+hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
 print("\n||| PASSWORD HASH |||")
 print(hashed_password,"\n")
@@ -61,24 +61,30 @@ def check_world_writable(path):
     print('Security scanner running...')
 
     if not os.path.exists(path):
-        print(f"[INFO] {path} does not exist.")
+        print(f"{path} does not exist.")
         return
 
     file_stat = os.stat(path)
     if file_stat.st_mode & stat.S_IWOTH:
-        print(f"[WARNING] {path} is world-writable!")
+        print(f"{path} is world-writable. Maybe change that?")
     else:
-        print(f"[OK] {path} permissions look safe.")
+        print(f"{path} permissions look safe.")
 
-# Example files to check
-files_to_check = [
-    "config.txt",
-    ".env",
-    "settings.json"
-]
+files_to_check = []
 
-fpInput = input("Give the path of a file you want to check for security issues: ")
-files_to_check.append(fpInput)
+while True:
+    newInput = input("\nIs there a file you want to check for security issues? (Y/N)").strip().lower()
+
+    if newInput == 'n':
+        break
+
+    if newInput == 'y':
+        fpInput = input("\nGive the path of a file you want to check for security issues: ")
+        files_to_check.append(fpInput)
+        print("\n Keep adding files until you are done...")
+    else:
+        print("\nI am assuming this means no.")
+        break
 
 for file in files_to_check:
     check_world_writable(file)
